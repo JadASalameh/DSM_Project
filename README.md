@@ -1,61 +1,20 @@
 Running the Distributed Shared Memory Project
 
-This guide provides step-by-step instructions to compile and run the Distributed Shared Memory project. Please ensure your environment meets the prerequisites before starting.
-Prerequisites
+Prerequisites: • Maven must be installed. You can verify your installation by running "mvn --version" in a terminal. • Make is required to compile the project. Ensure it is installed on your system. • A compatible Java version should be installed. • You will also need a terminal emulator (e.g., gnome-terminal) if you plan to launch multiple windows.
 
-    Maven: Ensure Maven is installed on your system. Verify installation by running:
+Building the Project:
 
-    mvn --version
+Open a terminal in the root directory of the project.
 
-    Make: The project uses a Makefile for compilation. Ensure make is installed.
+Run the command "make" to compile the entire project. This command uses Maven to build the project and will generate the JAR file at: target/Distributed_Shared_Memory-1.0-SNAPSHOT.jar
 
-    Terminal Emulator: The provided scripts use terminal commands (e.g., gnome-terminal). Modify them if you use a different terminal emulator.
+Running the Project:
 
-    Java: Make sure you have a compatible version of Java installed.
+Step 1 – Start the Configuration Server: • In your project directory, run the script "run-configserver.sh" (i.e., type "./run-configserver.sh" in your terminal). • The configuration server distributes the node configuration to all nodes. Keep this terminal open while the project is running.
 
-Building the Project
+Step 2 – Launch Nodes and Clients Together: • Open a new terminal window. • In the project directory, run "launch.sh" by typing "./launch.sh". This script will open separate terminal windows to launch the following nodes in order: NodeA, NodeA1, NodeA2, NodeB, NodeB1, NodeB2, NodeD, NodeD1, NodeD2 • After all nodes start, the script will also launch two clients. One client will use "client1_requests.txt" and the other will use "client2_requests.txt".
 
-    Open a terminal in the root directory of the project.
-
-    Run the following command to compile the entire project using Maven and the Makefile:
-
-make
-
-This will compile the code and generate the JAR file at:
-
-    target/Distributed_Shared_Memory-1.0-SNAPSHOT.jar
-
-Running the Project
-Step 1: Start the Configuration Server
-
-    In the project directory, run the configuration server script:
-
-    ./run-configserver.sh
-
-    The configuration server is responsible for providing configuration details (such as node information) to all nodes.
-    Keep this terminal open because the configuration server must be running before launching any nodes.
-
-Step 2: Launch Nodes and Clients Together
-
-    Open a new terminal window.
-
-    From the project directory, execute the script that launches all nodes and clients at once:
-
-    ./launch.sh
-
-    This script opens separate terminal windows for each node and for two client processes. The nodes will start in the following order:
-
-        NodeA, NodeA1, NodeA2, NodeB, NodeB1, NodeB2, NodeD, NodeD1, NodeD2
-        After the nodes are up, two clients are launched, with each client reading from client1_requests.txt or client2_requests.txt respectively.
-
-Alternative: Run Each Node and Client Separately
-
-If you prefer to run each node or client individually, separate scripts are provided:
-Running Nodes Individually
-
-You can run any node separately using the run-node.sh script. Open a new terminal for each node and execute:
-
-./run-node.sh NodeA
+Alternative – Running Nodes and Clients Individually: If you prefer to start each component separately, you can use the provided scripts: • To run an individual node, open a terminal window for each node and type: ./run-node.sh NodeA
 ./run-node.sh NodeA1
 ./run-node.sh NodeA2
 ./run-node.sh NodeB
@@ -64,36 +23,10 @@ You can run any node separately using the run-node.sh script. Open a new termina
 ./run-node.sh NodeD
 ./run-node.sh NodeD1
 ./run-node.sh NodeD2
+(Each command starts NodeMain for the specified node with the JAR file "target/Distributed_Shared_Memory-1.0-SNAPSHOT.jar" on the classpath.)
 
-Each command will start the corresponding node using:
-
-java -cp "target/Distributed_Shared_Memory-1.0-SNAPSHOT.jar":. NodeMain <NodeName>
-
-Running Clients Individually
-
-Similarly, you can run clients individually using the run-client.sh script. Open a new terminal for each client and execute:
-
-./run-client.sh client1_requests.txt
+• To run a client individually, open a new terminal window for each client and type: ./run-client.sh client1_requests.txt
 ./run-client.sh client2_requests.txt
+(Each command launches a Client process using the provided request file.)
 
-Each command will start a client with the specified request file:
-
-java -cp "target/Distributed_Shared_Memory-1.0-SNAPSHOT.jar":. Client <request_file>
-
-Summary
-
-    Ensure prerequisites are met: Install Maven, Make, a terminal emulator, and a compatible Java version.
-
-    Build the project: Run make in the project directory.
-
-    Start the configuration server: Run ./run-configserver.sh and keep that terminal open.
-
-    Launch nodes and clients together: Open a new terminal and run ./launch.sh.
-
-    (Optional) Run nodes and clients individually:
-
-        Use ./run-node.sh <NodeName> for nodes.
-
-        Use ./run-client.sh <request_file> for clients.
-
-Following these steps will compile the project and properly launch the configuration server, nodes, and clients, allowing you to test the Distributed Shared Memory system.
+Summary: • Ensure Maven is installed before starting. • In the project directory, compile the project by running "make". • Start the configuration server with "./run-configserver.sh" and leave that terminal open. • To run everything at once, open a separate terminal and run "./launch.sh". • Alternatively, run individual nodes using "./run-node.sh <NodeName>" and individual clients with "./run-client.sh <request_file>".
