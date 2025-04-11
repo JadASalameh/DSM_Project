@@ -1,0 +1,37 @@
+[ {
+  "name" : "NodeA",
+  "startAddress" : 0,
+  "endAddress" : 499,
+  "primary" : true,
+  "replicaNodes" : [ "NodeA1", "NodeA2" ]
+}, {
+  "name" : "NodeA1",
+  "startAddress" : 0,
+  "endAddress" : 499,
+  "primary" : false,
+  "replicaNodes" : [ "NodeA", "NodeA2" ]
+}, {
+  "name" : "NodeA2",
+  "startAddress" : 0,
+  "endAddress" : 499,
+  "primary" : false,
+  "replicaNodes" : [ "NodeA", "NodeA1" ]
+}, {
+  "name" : "NodeB",
+  "startAddress" : 500,
+  "endAddress" : 999,
+  "primary" : true,
+  "replicaNodes" : [ "NodeB1", "NodeB2" ]
+}, {
+  "name" : "NodeB1",
+  "startAddress" : 500,
+  "endAddress" : 999,
+  "primary" : false,
+  "replicaNodes" : [ "NodeB", "NodeB2" ]
+}, {
+  "name" : "NodeB2",
+  "startAddress" : 500,
+  "endAddress" : 999,
+  "primary" : false,
+  "replicaNodes" : [ "NodeB", "NodeB1" ]
+} ]
